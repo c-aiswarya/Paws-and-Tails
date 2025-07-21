@@ -3,5 +3,7 @@ The Paws & Tails project is a street dog adoption platform which is a community 
 This web application aims to serve as a platform dedicated to rescuing street dogs and disabled dogs by connecting them with compassionate individuals or organizations that can offer them medical care, shelter, and love.
 
 Front End : HTML ,CSS ,JAVASCRIPT
+
 Back End : Python , Sqlite
+
 Framework: Django
