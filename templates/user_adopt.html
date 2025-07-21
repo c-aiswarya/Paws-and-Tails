@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption List</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #f0f8ff; /* Light background color for contrast */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #3b945e;
+            margin-top: 20px;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #3b945e;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left; /* Align text to the left */
+        }
+        thead {
+            background-color: #81c784;
+            color: white;
+        }
+        tbody tr {
+            background-color: #ffffff;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Alternating row colors for better readability */
+        }
+        tbody tr:hover {
+            background-color: #e0f2f1; /* Highlight row on hover */
+        }
+        .back-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-bottom: 15px;
+        }
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adoption List</h1>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="window.history.back();">Back</button>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Dog Name</th>
+                    <th>Breed</th>
+                    <th>Age</th>
+                    <th>Municipality Name</th>
+                    <th>ID Proof</th>
+                    <th>Email</th>
+                    <th>Place</th>
+                    <th>Add feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if a %}
+                {% for adoption in a %}
+                <tr>
+                    <td>{{ adoption.dogname }}</td>
+                    <td>{{ adoption.breed }}</td>
+                    <td>{{ adoption.age }}</td>
+                    <td>{{ adoption.muncipality_name }}</td>
+                    <td>{{ adoption.idproof }}</td>
+                    <td>{{ adoption.email }}</td>
+                    <td>{{ adoption.place }}</td>
+                    <td><a href="/dog_feedback/{{ adoption.id}}">Add feedback</a></td>
+                    <td><a href="/user_addvaccination/{{adoption.id}} " class="link-button">Add Vaccine Chart</a></td>
+                    <td><a href="{% url 'vaccine_list' adoption.id %}" class="link-button">List Vaccine Chart</a></td>
+                    
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="7" style="text-align: center;">No adoptions found.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

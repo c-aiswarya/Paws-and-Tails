@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #7fd8f4; /* Pink background color */
+        }
+        .container {
+            background-color: #f3f4f5c9; /* White background for form */
+            padding: 100px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #3e99e8; /* Pink button color */
+            border: none;
+            border-radius: 25px; /* Rounded button */
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #33b5d6; /* Darker pink on hover */
+        }
+        .btn-secondary {
+            border-radius: 25px; /* Rounded button */
+        }
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+        .profile-img-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px; /* Adjust margin to separate from form */
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 30%; /* Makes the image circular */
+            object-fit: cover; /* Ensures the image covers the container */
+            border: 2px solid #3ea1e8; /* Pink border around the image */
+            box-shadow: 0 4px 8px rgba(25, 175, 230, 0.2);
+        }
+        h1 {
+            color: #090909; /* Heading color */
+        }
+        .form-control {
+            border-radius: 25px; /* Rounded input fields */
+            transition: box-shadow 0.3s;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(46, 148, 221, 0.5); /* Focus shadow effect */
+            border-color: #3ed4e8; /* Change border color on focus */
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">My Profile</h1>
+        <div class="profile-img-container">
+            {% if image %}
+                <img src="{{ image.url }}" alt="Profile Image" class="profile-img mt-2">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+        </div>
+        <form method="POST" action="/update_profile/"   enctype="multipart/form-data"> 
+
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">Adminname:</label>
+                <input type="text" id="adminname" name="adminname" class="form-control" value="{{adminname}}" readonly>
+            </div>
+           
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" value="{{email}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="number" id="phno" name="phno" class="form-control" value="{{phno}}" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" value="{{password}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control" value="{{confirm_password}}" readonly>
+            </div>
+       
+            
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
+            <button type="button" class="btn btn-secondary btn-block"><a href="/user_home/" class="text-white">Back To Home</a></button>
+        </form>
+        <div class="footer">
+            &copy; 2024 Your Company. All rights reserved.
+        </div>
+         </form>   
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt a Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Jost', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f4f3;
+            background: linear-gradient(to bottom right, #ffffff, #e6f2e6);
+            background-image: url("{% static 'images/pet.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Main container for card */
+        .adopt-container {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px); /* Add blur effect to background */
+        }
+
+        h2 {
+            text-align: center;
+            color: #4a8a2b;
+            font-size: 2em; /* Increased font size */
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card p {
+            color: #555;
+            font-size: 1.1em;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .card p b {
+            color: #4a8a2b;
+        }
+
+        /* Input styling */
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #4a8a2b;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px; /* Spacing below the input */
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6cb34a;
+            box-shadow: 0 0 5px rgba(108, 179, 74, 0.5);
+        }
+
+        /* Submit button */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4a8a2b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #6cb34a;
+        }
+
+        /* Responsive design for mobile view */
+        @media (max-width: 600px) {
+            .adopt-container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="adopt-container">
+        <h2>Adopt Details</h2>
+        <div class="card">
+            <p><b>Dog Name:</b> {{ dogname }}</p>
+            <p><b>Breed:</b> {{ breed }}</p>
+            <p><b>Age:</b> {{ age }}</p>
+            <p><b>Email:</b> {{ email }}</p>
+            <p><b>Municipality:</b> {{ muncipality_name }}</p>
+        </div>
+
+        <form action="{% url 'ado_pt' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="dogname" value="{{ dogname }}">
+            <input type="hidden" name="breed" value="{{ breed }}">
+            <input type="hidden" name="age" value="{{ age }}">
+            <input type="hidden" name="muncipality_name" value="{{ muncipality_name }}">
+
+            <!-- Submit button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

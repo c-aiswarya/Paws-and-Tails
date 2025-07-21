@@ -1,0 +1,38 @@
+{% extends "adminhome.html" %}
+{% block content %}
+
+<h1 style="text-align: center; color: #3b945e; font-family: 'Comic Sans MS', sans-serif; margin-top: 20px;">Adoption List</h1>
+
+<div style="overflow-x: auto; margin: 20px;">
+    <table style="width: 100%; border-collapse: collapse; font-family: 'Comic Sans MS', sans-serif;">
+        <thead>
+            <tr style="background-color: #81c784; color: white;">
+                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Dog Name</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Breed</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Age</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Adopter Name</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">ID Proof</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Email</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Place</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for adoption in adoptions %}
+            <tr style="background-color: {% cycle '#f1f8f5' '#ffffff' %};">
+                <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ adoption.dogname }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ adoption.breed }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ adoption.age }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ adoption.name }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ adoption.idproof }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ adoption.email }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{ adoption.place }}</td>
+                
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

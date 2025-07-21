@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .back-home {
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-home:hover {
+            background-color: #218838;
+        }
+
+        .search-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+
+        .search-buttons button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 48%;
+        }
+
+        .search-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .search-form {
+            display: none;
+            margin-bottom: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .search-form input,
+        .search-form button {
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .search-form input {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+        }
+
+        .search-form button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .pet-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .pet-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pet-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .pet-card img {
+            border-radius: 5px;
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .breed-name {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .qr-code img {
+            margin-top: 10px;
+            width: 80px;
+            height: auto;
+        }
+
+        .no-pets-message {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Pets</h1>
+    
+    <a href="{% url 'user_home' %}" class="back-home">Back to Home</a>
+
+    <!-- Search Buttons -->
+    <div class="search-buttons">
+        <button onclick="toggleSearchForm('breed')">Search by Breed</button>
+        <button onclick="toggleSearchForm('muncipality')">Search by Municipality</button>
+    </div>
+
+    <!-- Search Forms -->
+    <div id="search-by-breed" class="search-form">
+        <form action="/searchdog/" method="post">
+            {% csrf_token %}
+            <input type="text" name="breed" placeholder="Search by breed...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    
+    <div id="search-by-muncipality" class="search-form">
+        <form action="/searchdogmuncipality/" method="post">
+            {% csrf_token %}
+            <input type="text" name="muncipality_name" placeholder="Search by municipality...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Pet List -->
+    <div class="pet-list">
+        {% if pets %}
+            {% for pet in pets %}
+                {% if pet.status == "Available" %}
+                    <div class="pet-card">
+                        <img src="{{ pet.image.url }}" alt="Image of {{ pet.breed }}">
+                        <div class="breed-name">{{ pet.breed }}</div>
+                        {% if pet.qr_code %}
+                            <div class="qr-code">
+                                <img src="{{ pet.qr_code.url }}" alt="QR Code">
+                            </div>
+                            <p><a href="/vaccine_list/{{ pet.id }}">Vaccine Chart</a></p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p class="no-pets-message">No pets available at the moment.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleSearchForm(formType) {
+            document.getElementById('search-by-breed').style.display = 'none';
+            document.getElementById('search-by-muncipality').style.display = 'none';
+
+            if (formType === 'breed') {
+                document.getElementById('search-by-breed').style.display = 'block';
+            } else if (formType === 'muncipality') {
+                document.getElementById('search-by-muncipality').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption List</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #3b945e;
+            margin-top: 20px;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #3b945e;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        thead {
+            background-color: #81c784;
+            color: white;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tbody tr:hover {
+            background-color: #e0f2f1;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adoption List</h1>
+
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-btn">Back</a>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Dog Name</th>
+                    <th>Breed</th>
+                    <th>Age</th>
+                    <th>Municipality Name</th>
+                    <th>ID Proof</th>
+                    <th>Email</th>
+                    <th>Place</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if adoptions %}
+                    {% for adoption in adoptions %}
+                        <tr>
+                            <td>{{ adoption.dogname }}</td>
+                            <td>{{ adoption.breed }}</td>
+                            <td>{{ adoption.age }}</td>
+                            <td>{{ adoption.muncipality_name }}</td>
+                            <td>{{ adoption.idproof }}</td>
+                            <td>{{ adoption.email }}</td>
+                            <td>{{ adoption.place }}</td>
+                            <td><a href="/list_feedback/{{ adoption.id }}">Feedback</a></td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">No adoptions found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vaccination Record</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f9fc;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-submit {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            width: 100%;
+            font-size: 16px;
+        }
+        .btn-submit:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Add Vaccination Record for {{ t.dogname }}</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="date" class="form-label">Vaccination Date</label>
+                <input type="date" id="date" name="date" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="batchnumber" class="form-label">Batch Number</label>
+                <input type="text" id="batchnumber" name="batchnumber" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="due" class="form-label">Due Date for Next Vaccination</label>
+                <input type="date" id="due" name="due" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="veterinarian" class="form-label">Veterinarian Document</label>
+                <input type="file" id="veterinarian" name="veterinarian" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-submit">Add Vaccination</button>
+        </form>
+    </div>
+</body>
+</html>

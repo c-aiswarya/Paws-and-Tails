@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .dog-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        .rating {
+            font-size: 1.5em;
+            color: #ffc107;
+            margin-top: 20px;
+        }
+        .feedback-container {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .feedback-container p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        .feedback-container p strong {
+            font-weight: bold;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Dog Feedback Details</h1>
+
+        <div class="feedback-container">
+            <p><strong>Dog Name:</strong> {{ f.dogname }}</p>
+            <p><strong>Breed:</strong> {{ f.breed }}</p>
+
+            <img src="{{ f.image.url }}" alt="Dog Image" class="dog-image">
+
+            <p><strong>Feedback:</strong> {{ f.feedback_text }}</p>
+
+            <div class="rating">
+                <strong>Rating:</strong> 
+                {% for i in range_value %}
+                    &#9733;
+                {% endfor %}
+            </div>
+            
+            <!-- Back button -->
+            <a href="javascript:history.back()" class="back-btn">Back</a>
+        </div>
+    </div>
+
+</body>
+</html>

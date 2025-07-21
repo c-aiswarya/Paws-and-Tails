@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Trainer Timetable</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .btn-submit {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Add Trainer Timetable</h2>
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Trainer Details Section -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Trainer Name</label>
+                <input type="text" id="Name" name="Name" value="{{t.Name}}" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Trainer Email</label>
+                <input type="email" id="email" name="email" value="{{t.email}}" class="form-control" required>
+            </div>
+
+            <!-- Timetable Details Section -->
+            <div class="mb-3">
+                <label for="muncipality_name" class="form-label">Municipality Name</label>
+                <input type="text" id="muncipality_name" name="muncipality_name" value="{{a.muncipality_name}}" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" id="date" name="date" class="form-control" required>
+            </div>
+            
+
+            <div class="mb-3">
+                <label for="start_time" class="form-label">Start Time</label>
+                <input type="time" id="start_time" name="start_time" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="end_time" class="form-label">End Time</label>
+                <input type="time" id="end_time" name="end_time" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" id="location" name="location" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="details" class="form-label">Additional Details</label>
+                <textarea id="details" name="details" class="form-control" rows="3" placeholder="Optional"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Add Timetable</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Set the minimum date to today
+        document.getElementById('date').min = new Date().toISOString().split("T")[0];
+    </script>
+</body>
+</html>

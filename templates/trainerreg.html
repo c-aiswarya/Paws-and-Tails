@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 187, 255, 0.093), rgba(0, 229, 255, 0.679)),
+            url("static/image/pet.jpg");
+        }
+        .card {
+            border-radius: 15px;
+            background-position: center, center;
+            background-color: rgba(0, 200, 255, 0.089);
+        }
+        .card-header {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #0056b3;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .alert-danger {
+            font-size: 14px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        .back-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h3>Trainer Registration</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Back Button -->
+                        <a href="javascript:history.back()" class="back-btn">Back</a>
+
+                        <!-- Display message if there's an error -->
+                        {% if msg %}
+                        <div class="alert alert-danger text-center">
+                            {{ msg }}
+                        </div>
+                        {% endif %}
+
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label for="muncipality_name" class="form-label">Municipality Name</label>
+                                <input type="text" class="form-control" id="muncipality_name" name="muncipality_name" value="{{a.muncipality_name}}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="Name" name="Name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" name="address" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Gender</label>
+                                <select class="form-select" id="gender" name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="place" name="place" class="form-label">Place</label>
+                                <select class="form-select" id="place" name="place">
+                                    <option value="">Select Place</option>
+                                    <option value="Kollam">Kollam</option>
+                                    <option value="Kottayam">Kottayam</option>
+                                    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                                    <option value="Ernakulam">Ernakulam</option>
+                                    <option value="Alappuzha">Alappuzha</option>
+                                    <option value="Iddukki">Iddukki</option>
+                                    <option value="Palakad">Palakad</option>
+                                    <option value="Thirssur">Thirssur</option>
+                                    <option value="Pathanamthitta">Pathanamthitta</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="certificate" class="form-label">Certificate</label>
+                                <input type="file" class="form-control" id="certificate" name="certificate" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phno" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="phno" name="phno" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Profile Picture (optional)</label>
+                                <input type="file" class="form-control" id="image" name="image">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

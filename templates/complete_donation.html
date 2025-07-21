@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Page Background */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+        }
+
+        /* Payment Container */
+        .payment-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .payment-container h1 {
+            margin-bottom: 1.5rem;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Payment Details Styling */
+        .payment-detail {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .payment-detail strong {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Pay Button */
+        .pay-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .pay-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-container">
+        <h1>Payment Details</h1>
+        <div class="payment-detail"><strong>Name:</strong> {{ d.name }}</div>
+        <div class="payment-detail"><strong>ID Proof:</strong> {{ d.idproof }}</div>
+        <div class="payment-detail"><strong>Email:</strong> {{ d.email }}</div>
+        <div class="payment-detail"><strong>Phone Number:</strong> {{ d.phno }}</div>
+        <div class="payment-detail"><strong>Date:</strong> {{ d.date }}</div>
+        <div class="payment-detail"><strong>Amount Due:</strong> ${{ d.price }}</div>
+        <a href="/payment/{{ d.id }}" class="pay-button">Proceed to Pay</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccination Records</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fbb8d0; /* Baby pink background */
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #f15bb5; /* Pink color for the title */
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #f15bb5;
+            color: white;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+        td img {
+            border-radius: 5px;
+            width: 100px;
+            height: 100px;
+        }
+        .no-document {
+            color: #888;
+            font-style: italic;
+        }
+        .signature {
+            font-size: 14px;
+            color: #888;
+            text-align: right;
+            font-style: italic;
+        }
+        .btn-back {
+            margin-top: 30px;
+        }
+        .btn-back button {
+            background-color: #f15bb5;
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-back button:hover {
+            background-color: #d42a91; /* Darker pink on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Vaccination Records</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Dog Name</th>
+                    <th>Date</th>
+                    <th>Batch Number</th>
+                    <th>Due</th>
+                    <th>Veterinarian Document</th>
+                    <th>Veterinarian</th>
+                    <th>vaccine</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in v %}
+                <tr>
+                    <td>{{ i.dog.dogname }}</td>
+                    <td>{{ i.date }}</td>
+                    <td>{{ i.batchnumber }}</td>
+                    <td>{{ i.due }}</td>
+                    <td>
+                        {% if i.veterinarian %}
+                        <img src="{{ i.veterinarian.url }}" alt="Veterinarian Document">
+                        {% else %}
+                        <p class="no-document">No document uploaded</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="signature">
+                            <p>DR. {{ i.veterinarian.name }}</p>
+                            <p>Veterinarian</p>
+                        </div>
+                    </td>
+                    
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No vaccination records available.</td>
+
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Back Button -->
+        <div class="text-center btn-back">
+            <button onclick="window.history.back();">Back</button>
+        </div>
+    </div>
+</body>
+</html>

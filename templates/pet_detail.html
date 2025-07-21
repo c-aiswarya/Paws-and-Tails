@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        img {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+            
+        }
+        .Adopt{
+            background-color: #4CAF50;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .Adopt:hover{
+            background-color: #1eb123d2;
+            color: #feffff;
+        }
+       
+    </style>
+</head>
+<body>
+    <h1>{{ pet.dogname }}'s Details</h1>
+    <p>Breed: {{ pet.breed }}</p>
+    <p>Age: {{ pet.age }}</p>
+    <p><strong>Municipality Name:</strong> {{ pet.muncipality.muncipality_name }}</p>
+    <img src="{{ pet.image.url }}" alt="Dog Image" width="200"><br><br>
+    <a href="{% url 'pet_list' %}">Back to List</a>
+    <a href="/adopt/{{ pet.id }}" class="Adopt">Adopt</a>
+    <a href="/vaccine_list/{{pet.id}}">List vaccine chart</a>
+</body>
+</html>

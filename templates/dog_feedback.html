@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Feedback</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 700;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #218838;
+            color: white;
+        }
+        .cart-text {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .textarea-container {
+            position: relative;
+            margin-top: 20px;
+        }
+        #feedback {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            resize: none;
+            min-height: 100px;
+            font-size: 1em;
+            color: #333;
+        }
+        #feedback:focus {
+            outline: none;
+            border-color: #80bdff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+        .star-rating label {
+            font-size: 2em;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .star-rating input[type="radio"]:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <h2>Dog Feedback</h2>
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'dog_feed' %}">
+                        {% csrf_token %}
+                        
+                        <!-- Display Dog Details -->
+                        <p class="cart-text"><b>Dog Name:</b> {{ e }}</p>
+                        <p class="cart-text"><b>Age:</b> {{ d }}</p>
+                        <p class="cart-text"><b>Breed:</b> {{ j }}</p>
+                        <p class="cart-text"><b>Color:</b> {{ b }}</p>
+                        <p class="cart-text"><b>Gender:</b> {{ c }}</p>
+                        
+                        <input type="hidden" name="dogname" value="{{ e }}">
+                        <input type="hidden" name="age" value="{{ d }}">
+                        <input type="hidden" name="breed" value="{{ j }}">
+                        <input type="hidden" name="color" value="{{ b }}">
+                        <input type="hidden" name="gender" value="{{ c }}">
+                        
+                        <!-- Image upload -->
+                        <div class="form-group">
+                            <label for="image">Upload Image</label>
+                            <input type="file" class="form-control" name="image" id="image" accept="image/*">
+                        </div>
+                        
+                        <!-- Feedback text area -->
+                        <div class="textarea-container">
+                            <label for="feedback">Your Feedback:</label>
+                            <textarea id="feedback" name="feedback_text" placeholder="Write your feedback here..." required></textarea>
+                        </div>
+
+                        <!-- Rating system -->
+                        <div class="rating">
+                            <label>Rating:</label>
+                            <div class="star-rating">
+                                <input type="radio" id="rating5" name="rating" value="5">
+                                <label for="rating5">&#9733;</label>
+                                <input type="radio" id="rating4" name="rating" value="4">
+                                <label for="rating4">&#9733;</label>
+                                <input type="radio" id="rating3" name="rating" value="3">
+                                <label for="rating3">&#9733;</label>
+                                <input type="radio" id="rating2" name="rating" value="2">
+                                <label for="rating2">&#9733;</label>
+                                <input type="radio" id="rating1" name="rating" value="1">
+                                <label for="rating1">&#9733;</label>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-custom btn-block">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

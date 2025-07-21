@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Dog Trainer Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .card-header {
+            background-color: #FF914D; /* Warm dog-friendly color */
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .card-header::before {
+            content: url('{% static "images/dog-icon.png" %}'); /* Add a dog icon in the header */
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 10px;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-primary {
+            background-color: #FF914D;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #FF6A33;
+        }
+        label.form-label {
+            font-weight: bold;
+            color: #4a4a4a;
+        }
+        .form-select, .form-control {
+            border-radius: 8px;
+        }
+        img {
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        p.no-certificate {
+            color: #FF914D;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center">
+                        <h3>Update Dog Trainer Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="Name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" name="Name" value="{{ t.Name }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" name="address" value="{{ t.address }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Gender</label>
+                                <select class="form-select" name="gender">
+                                    <option value="Male" {% if t.gender == "Male" %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if t.gender == "Female" %}selected{% endif %}>Female</option>
+                                    <option value="Other" {% if t.gender == "Other" %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="place" class="form-label">Place</label>
+                                <select class="form-select" name="place">
+                                    {% for place in places %}
+                                        <option value="{{ place }}" {% if t.place == place %}selected{% endif %}>{{ place }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" value="{{ t.email }}" required>
+                            </div>
+                            
+                            {% if t.certificate %}
+                                <img src="{{ t.certificate.url }}" width="100" height="100" alt="Trainer Certificate">
+                            {% else %}
+                                <p class="no-certificate">No certificate uploaded</p>
+                            {% endif %}
+                            
+                            <div class="mb-3">
+                                <label for="certificate" class="form-label">Certificate</label>
+                                <input type="file" class="form-control" name="certificate">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phno" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" name="phno" value="{{ t.phno }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" value="{{ t.password}}" name="password">
+                            </div>
+                            
+                            {% if t.image %}
+                                <img src="{{ t.image.url }}" width="100" height="100" alt="Trainer Profile Picture">
+                            {% else %}
+                                <p class="no-certificate">No profile picture uploaded</p>
+                            {% endif %}
+                            
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Profile Picture (optional)</label>
+                                <input type="file" class="form-control" name="image">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

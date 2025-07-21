@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        .payment-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        .payment-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #218838;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="payment-container">
+                    <h2>Complete Payment</h2>
+                    <form action="{{ callback_url }}" method="POST">
+                        <script
+                            src="https://checkout.razorpay.com/v1/checkout.js"
+                            data-key="{{ razorpay_merchant_key }}"
+                            data-amount="{{ razorpay_amount }}"
+                            data-currency="{{ currency }}"
+                            data-order_id="{{ razorpay_order_id }}"
+                            data-buttontext="Pay with Razorpay"
+                            data-name="Your Company Name"
+                            data-description="Locker Rental Payment"
+                            data-image="/your_logo.png"
+                            data-prefill.name=""
+                            data-prefill.email=""
+                            data-theme.color="#F37254">
+                        </script>
+                        <input type="hidden" custom="Hidden Element" name="hidden">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

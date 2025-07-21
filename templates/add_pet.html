@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Pet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/street-6104056_1280.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-repeat: no-repeat;
+            color: white;
+        }
+        .container {
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            color: #fff; /* Text color for better contrast */
+        }
+        h1 {
+            text-align: center;
+            color: #f8f9fa;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #f8f9fa; /* Lighter shade for labels */
+        }
+        input[type="text"], input[type="number"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        input[type="text"]::placeholder, input[type="number"]::placeholder {
+            color: #dcdcdc; /* Placeholder color for visibility */
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .back-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-bottom: 15px;
+        }
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Pet</h1>
+        
+        <!-- Back Button -->
+        <button class="back-btn" onclick="window.history.back();">Back</button>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="muncipality_name">Municipality Name:</label>
+            <input type="text" name="muncipality_name" value="{{a.muncipality_name}}" readonly>
+
+            <label for="dogname">Dog Name:</label>
+            <input type="text" name="dogname" required>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+
+            <label for="breed">Breed:</label>
+            <input type="text" name="breed" required>
+            
+            <label for="color">Color:</label>
+            <input type="text" name="color" required>
+
+            <label>Gender:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female" required> Female</label>
+            </div>
+
+            <label for="image">Dog Image:</label>
+            <input type="file" name="image" required>
+
+            <button type="submit">Add Pet</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+{% extends "adminhome.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="header">
+        <h1>Donation Records</h1>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID Proof</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in donate %}
+            <tr>
+                <td>{{ i.idproof }}</td>
+                <td>{{ i.phno }}</td>
+                <td>{{ i.email }}</td>
+                <td>${{ i.price }}</td>
+                <td>{{ i.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Comic Sans MS', sans-serif;
+    }
+
+    /* Page Background */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #e0f7e9; /* Soft green background to reflect nature */
+    }
+
+    /* Container Styling */
+    .container {
+        width: 100%;
+        max-width: 700px;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Header Styling */
+    .header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .header h1 {
+        color: #3b945e; /* Dark green for a natural theme */
+        font-size: 1.8rem;
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th, td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #c8e6c9; /* Light green for softer borders */
+    }
+
+    th {
+        background-color: #81c784; /* Soft green for headers */
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    td {
+        color: #4e4e4e;
+    }
+
+    /* Table Rows */
+    tbody tr:nth-child(even) {
+        background-color: #f1f8f5; /* Very light green for alternating row colors */
+    }
+</style>
+
+{% endblock %}

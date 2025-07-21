@@ -1,0 +1,99 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Municipality List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Page Background */
+        body {
+            background-color: #eef6f3; /* Soft green background for a pet-friendly feel */
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Friendly font style */
+        }
+        
+        /* Container Styling */
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Styling */
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4c956c; /* Dark green for pet theme */
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            color: #555; /* Soft text color */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #81c784; /* Soft green header */
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* Row Hover Effect */
+        tr:hover {
+            background-color: #f1f8f5; /* Light green hover effect */
+        }
+
+        /* Delete Link Styling */
+        .delete-link {
+            color: #e57373; /* Soft red for delete action */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .delete-link:hover {
+            text-decoration: underline;
+            color: #d32f2f; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Paws Tails!</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Municipality Name</th>
+                    <th>Place</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in m %}
+                <tr>
+                    <td>{{ i.muncipality_name }}</td>
+                    <td>{{ i.place }}</td>
+                    <td>{{ i.phone }}</td>
+                    <td>{{ i.muncipality_email }}</td>
+                    <td>{{ i.username }}</td>
+                    <td><a href="/deletemuncipality/{{ i.id }}" class="delete-link">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}
